@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="login.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/styles/login.css" />
     <title>Login</title>
   </head>
   <body>
     <h1>Login/Sign up</h1>
     <div class="login">
-      <form name="myForm" action="index.html">
+      <form name="myForm" action="http://localhost:3000/">
         <input type="text" name="FName" placeholder="First Name" /> <br />
         <input type="text" name="LName" placeholder="Last Name" /> <br />
         <input type="email" name="email" placeholder="Email" /> <br />
@@ -24,6 +25,24 @@
     if (!Validate()) {
       event.preventDefault();
     } else {
+      var form = document.forms["myForm"];
+      var FName = form["FName"].value.trim();
+      var LName = form["LName"].value.trim();
+      var email = form["email"].value.trim();
+      var password = form["password"].value.trim();
+      console.log(FName+" "+LName+" "+email+" "+password)
+      axios.post("http://localhost:3000/api/createuser", {
+        fname: FName,
+        lname: LName,
+        email: email,
+        password: password
+    })
+    .then(response => {
+        console.log("Success:", response.data);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
       alert("Form submitted");
     }
   });
