@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barnes and Noble</title>
+    <link rel="stylesheet" href="/styles/index.css" />
+    <!-- AOS for animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Font Awesome for social icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <div class="nav">
+        <div class="logo">
+          <img src="/images/logo(new).webp" alt="Website Logo" />
+        </div>
+        <ul class="nav-list">
+          <li><a href="http://localhost:3000/books">Books</a></li>
+          <li><a href="#">Mystery Box</a></li>
+          <li><a href="#">Gifting</a></li>
+          <li><a href="http://localhost:3000/login">Login</a></li>
+        </ul>
+        <div class="search-bar">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search..."
+          />
+          <button class="btn" onclick="performSearch()">Search</button>
+          <!-- Added search functionality -->
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="image" data-aos="fade-up">
+      <h1>Unlock the world of stories—one page at a time.</h1>
+      <img src="/images/cover-image.webp" alt="Main Image" />
+    </section>
+    <!-- Bestsellers Section -->
+    <section class="bestsellers" data-aos="zoom-in">
+      <div class="bestseller-images">
+        <br />
+
+        <img src="/images/silent_patient.jpg" alt="first" />
+        <img src="/images/pines.jpg" alt="second" />
+        <img src="/images/ikigai.jpg" alt="third" />
+        <img src="/images/world.jpg" alt="fourth" />
+        <img src="/images/think.webp" alt="5" />
+        <img src="/images/atomic.webp" alt="6" />
+        <img src="/images/verity.webp" alt="7" />
+      </div>
+    </section>
+    <!-- Genres Section -->
+    <section class="genres" data-aos="fade-right">
+      <h2>Fiction Addition</h2>
+      <div class="btngrp">
+        <button class="genre-btn">Romance</button>
+        <button class="genre-btn">Thriller</button>
+        <button class="genre-btn">Fantasy</button>
+        <button class="genre-btn">Adventure</button>
+        <button class="genre-btn">Historical</button>
+      </div>
+    </section>
+
+    <section class="romance" data-aos="fade-left">
+      <img src="/images/genre.png" alt=" Genre Image" />
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer" data-aos="fade-up">
+      <div class="footer-container">
+        <div class="brand-info">
+          <h1>BarnesAndNobles.com</h1>
+          <img
+            src="/images/logo(new).webp"
+            alt="logo"
+            width="100"
+            height="100"
+          />
+          <p>Explore, discover, and enjoy your next favorite book!</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="column">
+            <h3>Brand Story</h3>
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Blogs</a>
+          </div>
+          <div class="column">
+            <h3>Shop Now</h3>
+            <a href="#">Books</a>
+            <a href="#">Mystery Box</a>
+            <a href="#">Merchandise</a>
+            <a href="#">Gifting</a>
+            <a href="#">Bulk</a>
+          </div>
+          <div class="column">
+            <h3>Policies</h3>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Shipping & Returns</a>
+            <a href="#">Payments & Refunds</a>
+            <a href="#">T&C</a>
+            <a href="#">Track Your Order</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>Copyright | All Rights Reserved, BarnesandNobles.com</p>
+      </div>
+    </footer>
+
+    <!-- Smooth Scroll and Animation scripts -->
+    <script>
+      AOS.init();
+
+      // Added search functionality (just an example)
+      function performSearch() {
+        const query = document.getElementById("search").value;
+        if (query) {
+          alert("Searching for: " + query);
+        } else {
+          alert("Please enter a search term");
+        }
+      }
+    </script>
+  </body>
+</html>

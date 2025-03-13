@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Bookstore</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+      }
+      .book-list,
+      .cart-container {
+        margin-top: 20px;
+      }
+      .book {
+        display: inline-block;
+        width: 30%;
+        margin: 10px;
+        padding: 10px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        text-align: center;
+      }
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+      }
+      .cart-summary {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .cart-summary button {
+        padding: 10px 20px;
+        background: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .recommendations {
+        margin-top: 20px;
+        text-align: center;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Online Bookstore</h1>
+      <div class="book-list" id="book-list"></div>
+      <button onclick="showCartPage()">Go to Cart</button>
+      <div class="cart-container" style="display: none">
+        <h2>Your Shopping Cart</h2>
+        <div id="cart-items"></div>
+        <div class="cart-summary">
+          <p>Total: ₹<span id="total-price">0</span></p>
+          <button onclick="emptyCart()">Empty Cart</button>
+          <button onclick="checkout()">Checkout</button>
+        </div>
+        <div class="recommendations" id="recommendations">
+          <h3>Recommended Books</h3>
+          <div id="recommended-books"></div>
+        </div>
+        <button onclick="showHomepage()">Back to Homepage</button>
+      </div>
+    </div>
+    <script>
+      var books = [
+        {
+          id: 1,
+          title: "1984",
+          author: "George Orwell",
+          price: 1250,
+          img: "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+        {
+          id: 2,
+          title: "The Great Gatsby",
+          author: "F. Scott Fitzgerald",
+          price: 1000,
+          img: "https://m.media-amazon.com/images/I/81xXAyG1yXL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+        {
+          id: 3,
+          title: "To Kill a Mockingbird",
+          author: "Harper Lee",
+          price: 1500,
+          img: "https://m.media-amazon.com/images/I/81OthjkJBuL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+        {
+          id: 4,
+          title: "Pride and Prejudice",
+          author: "Jane Austen",
+          price: 1100,
+          img: "https://m.media-amazon.com/images/I/81rTTbG3tbL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+        {
+          id: 5,
+          title: "The Catcher in the Rye",
+          author: "J.D. Salinger",
+          price: 1300,
+          img: "https://m.media-amazon.com/images/I/71i02MfAVLL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+        {
+          id: 6,
+          title: "Moby Dick",
+          author: "Herman Melville",
+          price: 1400,
+          img: "https://m.media-amazon.com/images/I/71-3uv6qUCL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+        {
+          id: 7,
+          title: "War and Peace",
+          author: "Leo Tolstoy",
+          price: 1600,
+          img: "https://m.media-amazon.com/images/I/71fPmYucqjL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+        {
+          id: 8,
+          title: "The Hobbit",
+          author: "J.R.R. Tolkien",
+          price: 1200,
+          img: "https://m.media-amazon.com/images/I/91b0C2YNSrL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+        {
+          id: 9,
+          title: "Crime and Punishment",
+          author: "Fyodor Dostoevsky",
+          price: 1350,
+          img: "https://m.media-amazon.com/images/I/71zA0tux8xL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+        {
+          id: 10,
+          title: "The Alchemist",
+          author: "Paulo Coelho",
+          price: 1150,
+          img: "https://m.media-amazon.com/images/I/71aFt4+OTOL._AC_UY327_FMwebp_QL65_.jpg",
+        },
+      ];
+      var cart = [];
+      function displayBooks() {
+        var bookList = document.getElementById("book-list");
+        bookList.innerHTML = "";
+        books.forEach(function (book) {
+          var bookDiv = document.createElement("div");
+          bookDiv.classList.add("book");
+          bookDiv.innerHTML = `
+    <img src="${book.img}" alt="${book.title}" style="width:100px; height:150px;"><br>
+    <h4>${book.title}</h4>
+    <p>Author: ${book.author}</p>
+    <p>Price: ₹${book.price}</p>
+    <button onclick="addToCart(${book.id})">Add to Cart</button>
+`;
+          bookList.appendChild(bookDiv);
+        });
+      }
+      function addToCart(bookId) {
+        var book = books.find((b) => b.id === bookId);
+        var existingItem = cart.find((item) => item.id === bookId);
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          cart.push({ ...book, quantity: 1 });
+        }
+      }
+      function showCartPage() {
+        document.querySelector(".book-list").style.display = "none";
+        document.querySelector(".cart-container").style.display = "block";
+        updateCart();
+      }
+      function showHomepage() {
+        document.querySelector(".book-list").style.display = "block";
+        document.querySelector(".cart-container").style.display = "none";
+      }
+      function updateCart() {
+        var cartItemsContainer = document.getElementById("cart-items");
+        var totalPriceElement = document.getElementById("total-price");
+        var recommendationsContainer =
+          document.getElementById("recommendations");
+        var recommendedBooksContainer =
+          document.getElementById("recommended-books");
+        cartItemsContainer.innerHTML = "";
+        var totalPrice = 0;
+        if (cart.length === 0) {
+          recommendationsContainer.style.display = "block";
+          recommendedBooksContainer.innerHTML = books
+            .map(
+              (book) =>
+                `<p>${book.title} by ${book.author} - ₹${book.price}</p>`
+            )
+            .join("");
+        } else {
+          recommendationsContainer.style.display = "none";
+        }
+        cart.forEach(function (item) {
+          var itemDiv = document.createElement("div");
+          itemDiv.classList.add("cart-item");
+          itemDiv.innerHTML = `
+                    <span>${item.title} - ₹${item.price}</span>
+                    <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)">
+                    <button onclick="removeFromCart(${item.id})">Remove</button>
+                `;
+          cartItemsContainer.appendChild(itemDiv);
+          totalPrice += item.price * item.quantity;
+        });
+        totalPriceElement.textContent = totalPrice;
+      }
+      function updateQuantity(bookId, quantity) {
+        var item = cart.find((item) => item.id === bookId);
+        if (item) {
+          item.quantity = parseInt(quantity);
+        }
+        updateCart();
+      }
+      function removeFromCart(bookId) {
+        cart = cart.filter((item) => item.id !== bookId);
+        updateCart();
+      }
+      function emptyCart() {
+        cart = [];
+        updateCart();
+      }
+      function checkout() {
+        alert("Proceeding to checkout");
+      }
+      displayBooks();
+    </script>
+  </body>
+</html>

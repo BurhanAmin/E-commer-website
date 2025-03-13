@@ -1,0 +1,154 @@
+/* General reset */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth; /* Smooth scrolling for anchors */
+    background-color: #F5F5DC;
+  }
+ 
+  /* Navigation Bar */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: beige;
+    color: azure;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease-in-out;
+  }
+ 
+  .nav .logo img {
+    width: 180px;
+    border-radius: 50%;
+  }
+ 
+  .nav-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+    font-size: 16px;
+  }
+ 
+  .nav-list li {
+    display: inline;
+  }
+ 
+  .nav-list a {
+    color: #6699CC;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: x-large;
+  }
+ 
+  .nav-list a:hover {
+    color: navy;
+    text-decoration: underline;
+  }
+ 
+  /* Search Bar */
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+ 
+  #search {
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 200px;
+  }
+  .btn {
+    padding: 10px 15px;
+    background-color:#6699CC;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: beige;
+    transition: background-color 0.3s ease;
+  }
+ 
+  .btn:hover {
+    background-color:whitesmoke;
+  }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+.book-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s;
+    background-color: #fafafa; /* Light background for each book card */
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.book-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.book-card h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.book-card .author {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.book-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: palevioletred;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.total-price {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-top: 2px solid #ccc;
+  text-align: right;
+  font-size: 1.2em;
+  font-weight: bold;
+}

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookstore - All Books</title>
+    <link rel="stylesheet" href="/styles/books.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <div class="logo">
+          <img src="/images/logo(new).webp" alt="Website Logo" />
+        </div>
+        <ul class="nav-list">
+          <li><a href="http://localhost:3000/books">Books</a></li>
+          <li><a href="#">Mystery Box</a></li>
+          <li><a href="#">Gifting</a></li>
+          <li><a href="http://localhost:3000/login">Login</a></li>
+        </ul>
+        <div class="search-bar">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search..."
+          />
+          <button class="btn" onclick="performSearch()">Search</button>
+          <!-- Added search functionality -->
+        </div>
+      </div>
+    </header>
+
+    <div style="margin-left: 20px">
+      <label for="sortDropdown"><b>Sort by Price:</b></label>
+      <select id="sortDropdown" onchange="sortProducts()">
+        <option value="low-to-high">Low to High</option>
+        <option value="high-to-low">High to Low</option>
+      </select>
+      <br />
+      <br />
+    </div>
+
+    <div id="book-container"></div>
+
+    <section class="book-list">
+      <h2>Our Collection</h2>
+
+      <!-- New Books Added (Pride and Prejudice, The Great Gatsby, etc.) -->
+
+      <!-- Adding 20 More Books -->
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/81Jqma9zcjL.jpg"
+          alt="Pines"
+        />
+        <h3>Pines</h3>
+        <p class="author">By Blake Crouch</p>
+        <p class="price">$12.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/81WQujeOxHL._AC_UF1000,1000_QL80_.jpg"
+          alt="Wayward"
+        />
+        <h3>Wayward</h3>
+        <p class="author">By Blake Crouch</p>
+        <p class="price">$13.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="data:image/jpeg;base64,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"
+          alt="The Last Town"
+        />
+        <h3>The Last Town</h3>
+        <p class="author">By Blake Crouch</p>
+        <p class="price">$14.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/81kpj1VBV-S._AC_UF1000,1000_QL80_.jpg"
+          alt="Dark Matter"
+        />
+        <h3>Dark Matter</h3>
+        <p class="author">By Blake Crouch</p>
+        <p class="price">$16.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/91868k2+gUL._AC_UF1000,1000_QL80_.jpg"
+          alt="Verity"
+        />
+        <h3>Verity</h3>
+        <p class="author">By Colleen Hoover</p>
+        <p class="price">$11.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/81uHYq+cvkL.jpg"
+          alt="The Thursday Murder Club"
+        />
+        <h3>The Thursday Murder Club</h3>
+        <p class="author">By Richard Osman</p>
+        <p class="price">$14.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/81GlTN6QQrL.jpg"
+          alt="Think Like a Monk"
+        />
+        <h3>Think Like a Monk</h3>
+        <p class="author">By Jay Shetty</p>
+        <p class="price">$18.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/41rz%2BTzqR7L._SY200_QL15_.jpg"
+          alt="Don't Shut Up"
+        />
+        <h3>Don't Shut Up</h3>
+        <p class="author">By Prakhar Gupta</p>
+        <p class="price">$17.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/71cjI4kaaZL.jpg"
+          alt="Focus on What Matters"
+        />
+        <h3>Focus on What Matters</h3>
+        <p class="author">By Darius Fox</p>
+        <p class="price">$19.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/51hxRAoHuxL._UF1000,1000_QL80_.jpg"
+          alt="Yellowface"
+        />
+        <h3>Yellowface</h3>
+        <p class="author">By R.F. Kuang</p>
+        <p class="price">$21.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/71rpa1-kyvL._AC_UF1000,1000_QL80_.jpg"
+          alt="1984"
+        />
+        <h3>1984</h3>
+        <p class="author">By George Orwell</p>
+        <p class="price">$9.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <!-- Harry Potter Series -->
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/81uRUnI9Y3L._AC_UF1000,1000_QL80_.jpg"
+          alt="Harry Potter Series"
+        />
+        <h3>All Harry Potter Books</h3>
+        <p class="author">By J.K. Rowling</p>
+        <p class="price">$99.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <!-- Percy Jackson Series -->
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/81EVEJp7GmL.jpg"
+          alt="Percy Jackson Series"
+        />
+        <h3>All Percy Jackson Books</h3>
+        <p class="author">By Rick Riordan</p>
+        <p class="price">$79.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <!-- Dune Series -->
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/M/MV5BOTc2YTFiOTItZmRiNi00OWE5LThhOTEtMmZhMTkzYmRiNjIxXkEyXkFqcGc@._V1_QL75_UX190_CR0,0,190,281_.jpg"
+          alt="Dune Series"
+        />
+        <h3>All Dune Books</h3>
+        <p class="author">By Frank Herbert</p>
+        <p class="price">$109.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/811AANz2OqL._AC_UF1000,1000_QL80_.jpg"
+          alt="The Last Murder at the End of the World"
+        />
+        <h3>The Last Murder at the End of the World</h3>
+        <p class="author">By Stuart Turton</p>
+        <p class="price">$29.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1691483284i/157020090.jpg"
+          alt="The Mystery Writer"
+        />
+        <h3>The Mystery Writer</h3>
+        <p class="author">By Sulari Gentill</p>
+        <p class="price">$22.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/81TLiZrasVL._UF1000,1000_QL80_.jpg"
+          alt="The Great Gatsby"
+        />
+        <h3>The Great Gatsby</h3>
+        <p class="author">By F. Scott Fitzgerald</p>
+        <p class="price">$10.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/71y4X5150dL._UF1000,1000_QL80_.jpg"
+          alt="The Da Vinci Code"
+        />
+        <h3>The Da Vinci Code</h3>
+        <p class="author">By Dan Brown</p>
+        <p class="price">$12.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/814bdk6plLL._UF1000,1000_QL80_.jpg"
+          alt="Wild and Distant Seas"
+        />
+        <h3>Wild and Distant Seas</h3>
+        <p class="author">By Tara Karr Roberts</p>
+        <p class="price">$14.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqUiz_QrwVaYf2dUtOtn-HU3FcLxdQnsy7qA&s"
+          alt="You Will Never Be Me"
+        />
+        <h3>You Will Never Be Me</h3>
+        <p class="author">By Jesse Q. Sutanto</p>
+        <p class="price">$13.49</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV-GXfCR8rRKMoYICE8Q4R4I94v9fOWiTbGg&s"
+          alt="Stillhouse Lake"
+        />
+        <h3>Stillhouse Lake</h3>
+        <p class="author">By Rachel Caine</p>
+        <p class="price">$11.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/71GOeX+ZUAL._UF1000,1000_QL80_.jpg"
+          alt="The V Girl"
+        />
+        <h3>The V Girl</h3>
+        <p class="author">By Mya Roberts</p>
+        <p class="price">$10.49</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK8ZOZX9a_0S4p_6Fs9JA6p-DilqWvVb5y6g&s"
+          alt="My Sister's Grave"
+        />
+        <h3>My Sister's Grave</h3>
+        <p class="author">By Robert Dugoni</p>
+        <p class="price">$12.49</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/81NSb9Jy0HL.jpg"
+          alt="Steve Jobs: The Biography"
+        />
+        <h3>Steve Jobs: The Biography</h3>
+        <p class="author">By Walter Isaacson</p>
+        <p class="price">$15.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/M/MV5BMTczNDk4NTQ0OV5BMl5BanBnXkFtZTcwNDAxMDgxNw@@._V1_FMjpg_UX1000_.jpg"
+          alt="The Girl with the Dragon Tattoo"
+        />
+        <h3>The Girl with the Dragon Tattoo</h3>
+        <p class="author">By Stieg Larsson & Reg Eeland</p>
+        <p class="price">$14.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+
+      <div class="book-card">
+        <img
+          src="https://m.media-amazon.com/images/I/91aWx6LUh-L._AC_UF1000,1000_QL80_.jpg"
+          alt="The Girl Who Played with Fire"
+        />
+        <h3>The Girl Who Played with Fire</h3>
+        <p class="author">By Stieg Larsson & Reg Eeland</p>
+        <p class="price">$13.99</p>
+        <button onclick="addToCart(this)">Add To Cart</button>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Bookstore. All rights reserved.</p>
+    </footer>
+
+    <script>
+      function sortProducts() {
+        const sortOption = document.getElementById("sortDropdown").value;
+        const bookList = document.querySelector(".book-list");
+        const bookCards = Array.from(
+          bookList.getElementsByClassName("book-card")
+        );
+
+        bookCards.sort((a, b) => {
+          const priceA = parseFloat(
+            a.querySelector(".price").innerText.replace("$", "")
+          );
+          const priceB = parseFloat(
+            b.querySelector(".price").innerText.replace("$", "")
+          );
+
+          return sortOption === "low-to-high"
+            ? priceA - priceB
+            : priceB - priceA;
+        });
+
+        bookCards.forEach((card) => bookList.appendChild(card));
+      }
+
+      function addToCart(button) {
+        // Get the parent book-card element
+        const bookCard = button.closest(".book-card");
+
+        // Extract the book details
+        const title = bookCard.querySelector("h3").innerText;
+        const price = bookCard.querySelector(".price").innerText;
+        const coverSrc = bookCard.querySelector("img").src;
+
+        // Prepare the data to be sent in the request body
+        const data = {
+          title: title,
+          price: price,
+          coverSrc: coverSrc,
+        };
+
+        // Make the Axios POST request
+        axios
+          .post("http://localhost:3000/api/addtocart", data)
+          .then((response) => {
+            // Handle the response from the server
+            console.log("Book added to cart:", response.data);
+            alert("Book added to cart successfully!");
+          })
+          .catch((error) => {
+            // Handle any errors
+            console.error("Error adding book to cart:", error);
+            alert("Failed to add book to cart. Please try again.");
+          });
+      }
+    </script>
+  </body>
+</html>

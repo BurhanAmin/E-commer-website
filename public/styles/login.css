@@ -1,0 +1,128 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth; /* Smooth scrolling for anchors */
+    background-color: #F5F5DC;
+    align-items: center;
+  }
+ 
+  /* Navigation Bar */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: beige;
+    color: azure;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease-in-out;
+  }
+ 
+  .nav .logo img {
+    width: 180px;
+    border-radius: 50%;
+  }
+ 
+  .nav-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+    font-family:poppins;
+    font-size: 16px;
+  }
+ 
+  .nav-list li {
+    display: inline;
+  }
+ 
+  .nav-list a {
+    color: #6699CC;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: x-large;
+  }
+ 
+  .nav-list a:hover {
+    color: navy;
+    text-decoration: underline;
+  }
+ 
+  /* Search Bar */
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+ 
+  #search {
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 200px;
+  }
+ 
+  .btn {
+    padding: 10px 15px;
+    background-color:#6699CC;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: beige;
+    transition: background-color 0.3s ease;
+  }
+ 
+  .btn:hover {
+    background-color:whitesmoke;
+  }
+ 
+
+h1 {
+    text-align: center;
+    color:navy;
+}
+
+.login {
+    background: beige;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    border: 2px solid #6699CC;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #6699CC;
+    border-radius: 5px;
+    text-align: center;
+    background-color: aliceblue;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background: #6699CC;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background: navy;
+}
