@@ -8,6 +8,31 @@
     <title>Login</title>
   </head>
   <body>
+    <header>
+      <div class="nav">
+        <div class="logo">
+          <a href="http://localhost:3000/books" target="_blank"></a>
+          <img src="/images/logo(new).webp" alt="Website Logo" />
+        </div>
+        <ul class="nav-list">
+          <li><a href="http://localhost:3000/">Home</a></li>
+          <li><a href="http://localhost:3000/books">Books</a></li>
+          <li><a href="http://localhost:3000/login">Login</a></li>
+          <li><a href="http://localhost:3000/cart">Cart</a></li>
+          <li><a href="http://localhost:3000/aboutus">About Us</a></li>
+        </ul>
+        <div class="search-bar">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search..."
+          />
+          <button class="btn" onclick="performSearch()">Search</button>
+          <!-- Added search functionality -->
+        </div>
+      </div>
+    </header>
     <h1>Login/Sign up</h1>
     <div class="login">
       <form name="myForm" action="http://localhost:3000">

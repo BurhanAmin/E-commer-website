@@ -6,14 +6,55 @@
     <title>Bookstore - Cart</title>
     <link rel="stylesheet" href="/styles/books.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+      }
+      .book-list,
+      .cart-container {
+        margin-top: 20px;
+      }
+      .book {
+        display: inline-block;
+        width: 30%;
+        margin: 10px;
+        padding: 10px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        text-align: center;
+      }
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+      }
+      .cart-summary {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .cart-summary button {
+        padding: 10px 20px;
+        background: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .recommendations {
+        margin-top: 20px;
+        text-align: center;
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <header>
       <h1>Cart</h1>
-      <p>
-        DON'T Explore the best books at the best prices! LEAVE LEAVE LVEA LLAEV
-        LEAV LAEL LVAE
-      </p>
+      <p>Your cart</p>
     </header>
 
     <section class="book-list">
@@ -26,7 +67,7 @@
           <h3><%= book.title %></h3>
           <p>By <%= book.author %></p>
           <p>Price: <%= book.price %></p>
-        </div>
+
         <% totalPrice += parseFloat(book.price.replace('$', '')); %>
         <!-- Add to total price -->
         <% }); %>
@@ -34,6 +75,10 @@
           <h3>Total Price: $<%= totalPrice.toFixed(2) %></h3>
           <!-- Display total price -->
         </div>
+        <a href="http://localhost.com:3000/checkout">
+          <button>Proceed to Checkout</button>
+        </a>
+      </div>
         <% } else { %>
         <p>Your cart is empty. Start adding books to see them here!</p>
         <% } %>

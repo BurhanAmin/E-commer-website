@@ -7,27 +7,27 @@ body {
     scroll-behavior: smooth; /* Smooth scrolling for anchors */
     background-color: #F5F5DC;
     align-items: center;
+
   }
  
-  /* Navigation Bar */
   .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px 30px;
-    background-color: beige;
+    background-color: #A0845C;
     color: azure;
     position: sticky;
     top: 0;
     z-index: 100;
     transition: all 0.3s ease-in-out;
   }
- 
+  
   .nav .logo img {
     width: 180px;
     border-radius: 50%;
   }
- 
+  
   .nav-list {
     list-style: none;
     padding: 0;
@@ -36,30 +36,30 @@ body {
     font-family:poppins;
     font-size: 16px;
   }
- 
+  
   .nav-list li {
     display: inline;
   }
- 
+  
   .nav-list a {
-    color: #6699CC;
+    color: navy;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
     font-size: x-large;
   }
- 
+  
   .nav-list a:hover {
-    color: navy;
+    color: slategray;
     text-decoration: underline;
   }
- 
+  
   /* Search Bar */
   .search-bar {
     display: flex;
     align-items: center;
   }
- 
+  
   #search {
     padding: 10px;
     margin-right: 10px;
@@ -68,7 +68,7 @@ body {
     font-size: 14px;
     width: 200px;
   }
- 
+  
   .btn {
     padding: 10px 15px;
     background-color:#6699CC;
@@ -79,7 +79,7 @@ body {
     color: beige;
     transition: background-color 0.3s ease;
   }
- 
+  
   .btn:hover {
     background-color:whitesmoke;
   }
@@ -98,12 +98,18 @@ h1 {
     width: 350px;
     text-align: center;
     border: 2px solid #6699CC;
+    justify-content: center;
+    height: auto;
+    align-items: center !important;
+    margin-left: 600px !important;
+
+    
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     margin: 10px;
     border: 1px solid #6699CC;
@@ -113,7 +119,7 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     background: #6699CC;
     color: white;

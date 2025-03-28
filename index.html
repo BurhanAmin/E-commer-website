@@ -18,13 +18,14 @@
     <header>
       <div class="nav">
         <div class="logo">
+          <a href="http://localhost:3000/books"></a>
           <img src="/images/logo(new).webp" alt="Website Logo" />
         </div>
         <ul class="nav-list">
           <li><a href="http://localhost:3000/books">Books</a></li>
-          <li><a href="#">Mystery Box</a></li>
-          <li><a href="#">Gifting</a></li>
           <li><a href="http://localhost:3000/login">Login</a></li>
+          <li><a href="http://localhost:3000/cart">Cart</a></li>
+          <li><a href="http://localhost:3000/aboutus">About Us</a></li>
         </ul>
         <div class="search-bar">
           <input
@@ -38,17 +39,55 @@
         </div>
       </div>
     </header>
+    
+    <div class="slideshow-container">
 
-    <!-- Hero Section -->
+      <!-- Full-width slides/quotes -->
+      <div class="mySlides">
+        <q>A reader lives a thousand lives before he dies.</q>
+      </div>
+    
+      <div class="mySlides">
+        <q>Reading is essential for those who seek to rise above the ordinary.</q>
+      </div>
+    
+      <div class="mySlides">
+        <q>You can’t buy happiness, but you can buy books—and that’s kind of the same thing.</q>
+      </div>
+
+      <div class="mySlides">
+        <q>A book is a dream that you hold in your hands.</q>
+      </div>
+
+      <div class="mySlides">
+        <q>Lose yourself in a book. Find yourself in our bookstore.</q>
+      </div>
+
+      <div class="mySlides">
+        <q>So many books, so little time.</q>
+      </div>
+    
+      <!-- Next/prev buttons -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <!-- Hero Section
     <section class="image" data-aos="fade-up">
-      <h1>Unlock the world of stories—one page at a time.</h1>
-      <img src="/images/cover-image.webp" alt="Main Image" />
-    </section>
+      <img src="/images/homepage.jpg" alt="Main Image" />
+    </section> -->
+    <!-- Slideshow container -->
+    <a href="http://localhost:3000/aboutus">
+      <img src="/images/homepage.jpg" class="clickable-image">
+ </a>
+
+<!-- Dots/bullets/indicators -->
+
     <!-- Bestsellers Section -->
     <section class="bestsellers" data-aos="zoom-in">
       <div class="bestseller-images">
         <br />
-
+        4
         <img src="/images/silent_patient.jpg" alt="first" />
         <img src="/images/pines.jpg" alt="second" />
         <img src="/images/ikigai.jpg" alt="third" />
@@ -59,20 +98,34 @@
       </div>
     </section>
     <!-- Genres Section -->
-    <section class="genres" data-aos="fade-right">
-      <h2>Fiction Addition</h2>
-      <div class="btngrp">
-        <button class="genre-btn">Romance</button>
-        <button class="genre-btn">Thriller</button>
-        <button class="genre-btn">Fantasy</button>
-        <button class="genre-btn">Adventure</button>
-        <button class="genre-btn">Historical</button>
-      </div>
-    </section>
+     <!-- <div class="img1">
+      <img src="/images/foe.jpg" alt="20">
+     </div> -->
 
-    <section class="romance" data-aos="fade-left">
-      <img src="/images/genre.png" alt=" Genre Image" />
-    </section>
+     <a href="http://localhost:3000/books">
+      <img src="/images/foe.jpg" class="img1">
+ </a>
+     <!-- Customer Reviews Section -->
+    <section class="reviews" id="reviews" data-aos="fade-up">
+      <h2>Customer Reviews</h2>
+      <div id="reviews-container"></div>
+
+      <h3>Leave a Review</h3>
+      <form id="review-form">
+          <input type="text" id="reviewer-name" placeholder="Your Name" required />
+          <select id="review-rating" required>
+              <option value="">Rate us</option>
+              <option value="5">★★★★★</option>
+              <option value="4">★★★★☆</option>
+              <option value="3">★★★☆☆</option>
+              <option value="2">★★☆☆☆</option>
+              <option value="1">★☆☆☆☆</option>
+          </select>
+          <textarea id="review-comment" placeholder="Write your review here..." required></textarea>
+          <button type="submit" class="btn">Submit Review</button>
+      </form>
+  </section>
+
 
     <!-- Footer Section -->
     <footer class="footer" data-aos="fade-up">
@@ -137,6 +190,67 @@
           alert("Please enter a search term");
         }
       }
+
+      var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+// Initialize AOS library
+
+
+// Handle Review Submission
+
+        // Initialize AOS library
+        
+
+        // Handle Review Submission
+        document.addEventListener("DOMContentLoaded", function () {
+    AOS.init();
+
+    // Handle Review Submission
+    document.getElementById("review-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("reviewer-name").value;
+        const rating = document.getElementById("review-rating").value;
+        const comment = document.getElementById("review-comment").value;
+
+        if (name && rating && comment) {
+            const reviewContainer = document.getElementById("reviews-container");
+            const review = document.createElement("div");
+            review.classList.add("review");
+            review.innerHTML = `<strong>${name}</strong> - ${"★".repeat(rating)}<p>${comment}</p>`;
+            reviewContainer.appendChild(review);
+
+            // Clear the form after submission
+            document.getElementById("review-form").reset();
+        }
+    });
+});
+
+    
     </script>
   </body>
 </html>

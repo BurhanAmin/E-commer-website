@@ -1,3 +1,78 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background-color: #A0845C;
+  color: azure;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav .logo img {
+  width: 180px;
+  border-radius: 50%;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 30px;
+  font-family:poppins;
+  font-size: 16px;
+}
+
+.nav-list li {
+  display: inline;
+}
+
+.nav-list a {
+  color: navy;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  font-size: x-large;
+}
+
+.nav-list a:hover {
+  color: slategray;
+  text-decoration: underline;
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+#search {
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 200px;
+}
+
+.btn {
+  padding: 10px 15px;
+  background-color:#6699CC;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: beige;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color:whitesmoke;
+}
+
+
 .total-price {
     margin-top: 20px;
     padding: 10px;
@@ -6,4 +81,18 @@
     text-align: right;
     font-size: 1.2em;
     font-weight: bold;
+  }
+  .checkout{
+    padding: 20px;
+    background-color: beige;
+    color: navy;
+  }
+  .checkout .btn{
+    padding: 20px;
+    background-color: beige;
+    color: navy;
+  }
+  .checkout .btn:hover{
+    background-color: #6699CC;
+    color: beige;
   }

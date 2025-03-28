@@ -96,6 +96,69 @@ body {
   opacity: 0;
   animation: fadeIn 1s forwards; /* Fade in animation */
 }
+.slideshow-container {
+  position: relative;
+  background: #F5F5DC;
+}
+
+/* Slides */
+.mySlides {
+  display: none;
+  padding: 80px;
+  text-align: center;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -30px;
+  padding: 16px;
+  color: #888;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  position: absolute;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: navy;
+  color: navy;
+}
+
+/* The dot/bullet/indicator container */
+
+
+/* The dots/bullets/indicators */
+
+
+/* Add a background color to the active dot/circle */
+
+/* Add an italic font style to all quotes */
+q{
+  font-family: monospace;
+  font-size: xx-large;
+  font-weight: 300;
+  color: #6699CC;
+}
+.img1 img {
+  max-width: 1500px;
+  height: auto; /* Maintains aspect ratio */
+}
+
+
+/* Add a blue color to the author */
+
 
 @keyframes fadeIn {
   to {
@@ -251,6 +314,172 @@ body {
     height: 225px;
   }
 }
+        .reviews {
+            padding: 40px;
+            text-align: center;
+            background-color: #fff;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .reviews h2 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        #reviews-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .review {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .review strong {
+            display: block;
+            font-size: 18px;
+            color: #444;
+        }
+
+        .review p {
+            font-size: 16px;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        /* Form Styling */
+        #review-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #review-form input, #review-form select, #review-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #review-form textarea {
+            height: 100px;
+        }
+
+        #review-form .btn {
+            background-color: #6699CC;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #review-form .btn:hover {
+            background-color: navy;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer .brand-info {
+            padding-bottom: 10px;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .footer-bottom {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    
+    .reviews {
+      padding: 40px;
+      text-align: center;
+      background-color: #fff;
+      margin: 40px auto;
+      max-width: 800px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+  }
+
+  .reviews h2 {
+      font-size: 28px;
+      color: #333;
+  }
+
+  #reviews-container {
+      margin-top: 20px;
+      text-align: left;
+  }
+
+  .review {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+  }
+
+  .review strong {
+      display: block;
+      font-size: 18px;
+      color: #444;
+  }
+
+  .review p {
+      font-size: 16px;
+      color: #666;
+      margin: 5px 0;
+  }
+
+  /* Form Styling */
+  #review-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+  }
+
+  #review-form input, #review-form select, #review-form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+  }
+
+  #review-form textarea {
+      height: 100px;
+  }
+
+  #review-form .btn {
+      background-color: #6699CC;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+
+  #review-form .btn:hover {
+      background-color: navy;
+  }
+
 
 /* Footer */
 .footer {

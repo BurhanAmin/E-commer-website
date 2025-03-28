@@ -47,9 +47,39 @@
         text-align: center;
         display: none;
       }
+      .checkout {
+        text-align: center;
+        margin-top: 20px;
+        display: none; /* Initially hidden */
+      }
+      .checkout button {
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
+    <header>
+      <div class="nav">
+        <div class="logo">
+          <a href="http://localhost:3000/books" target="_blank"></a>
+          <img src="/images/logo(new).webp" alt="Website Logo" />
+        </div>
+        <ul class="nav-list">
+          <li><a href="http://localhost:3000/books">Books</a></li>
+          <li><a href="http://localhost:3000/login">Login</a></li>
+          <li><a href="http://localhost:3000/cart">Cart</a></li>
+          <li><a href="http://localhost:3000/aboutus">About Us</a></li>
+        </ul>
+        <div class="search-bar">
+          <input type="text" name="search" id="search" placeholder="Search..." />
+          <button class="btn" onclick="performSearch()">Search</button>
+        </div>
+      </div>
+    </header>
     <div class="container">
       <h1>Online Bookstore</h1>
       <div class="book-list" id="book-list"></div>
@@ -67,82 +97,17 @@
           <div id="recommended-books"></div>
         </div>
         <button onclick="showHomepage()">Back to Homepage</button>
+        <div class="checkout" id="checkout-div">
+        </div>
       </div>
     </div>
     <script>
       var books = [
-        {
-          id: 1,
-          title: "1984",
-          author: "George Orwell",
-          price: 1250,
-          img: "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UY327_FMwebp_QL65_.jpg",
-        },
-        {
-          id: 2,
-          title: "The Great Gatsby",
-          author: "F. Scott Fitzgerald",
-          price: 1000,
-          img: "https://m.media-amazon.com/images/I/81xXAyG1yXL._AC_UY327_FMwebp_QL65_.jpg",
-        },
-        {
-          id: 3,
-          title: "To Kill a Mockingbird",
-          author: "Harper Lee",
-          price: 1500,
-          img: "https://m.media-amazon.com/images/I/81OthjkJBuL._AC_UY327_FMwebp_QL65_.jpg",
-        },
-        {
-          id: 4,
-          title: "Pride and Prejudice",
-          author: "Jane Austen",
-          price: 1100,
-          img: "https://m.media-amazon.com/images/I/81rTTbG3tbL._AC_UY327_FMwebp_QL65_.jpg",
-        },
-        {
-          id: 5,
-          title: "The Catcher in the Rye",
-          author: "J.D. Salinger",
-          price: 1300,
-          img: "https://m.media-amazon.com/images/I/71i02MfAVLL._AC_UY327_FMwebp_QL65_.jpg",
-        },
-        {
-          id: 6,
-          title: "Moby Dick",
-          author: "Herman Melville",
-          price: 1400,
-          img: "https://m.media-amazon.com/images/I/71-3uv6qUCL._AC_UY327_FMwebp_QL65_.jpg",
-        },
-        {
-          id: 7,
-          title: "War and Peace",
-          author: "Leo Tolstoy",
-          price: 1600,
-          img: "https://m.media-amazon.com/images/I/71fPmYucqjL._AC_UY327_FMwebp_QL65_.jpg",
-        },
-        {
-          id: 8,
-          title: "The Hobbit",
-          author: "J.R.R. Tolkien",
-          price: 1200,
-          img: "https://m.media-amazon.com/images/I/91b0C2YNSrL._AC_UY327_FMwebp_QL65_.jpg",
-        },
-        {
-          id: 9,
-          title: "Crime and Punishment",
-          author: "Fyodor Dostoevsky",
-          price: 1350,
-          img: "https://m.media-amazon.com/images/I/71zA0tux8xL._AC_UY327_FMwebp_QL65_.jpg",
-        },
-        {
-          id: 10,
-          title: "The Alchemist",
-          author: "Paulo Coelho",
-          price: 1150,
-          img: "https://m.media-amazon.com/images/I/71aFt4+OTOL._AC_UY327_FMwebp_QL65_.jpg",
-        },
+        { id: 1, title: "1984", author: "George Orwell", price: 1250, img: "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UY327_FMwebp_QL65_.jpg" },
+        { id: 2, title: "The Great Gatsby", author: "F. Scott Fitzgerald", price: 1000, img: "https://m.media-amazon.com/images/I/81xXAyG1yXL._AC_UY327_FMwebp_QL65_.jpg" }
       ];
       var cart = [];
+      
       function displayBooks() {
         var bookList = document.getElementById("book-list");
         bookList.innerHTML = "";
@@ -150,15 +115,16 @@
           var bookDiv = document.createElement("div");
           bookDiv.classList.add("book");
           bookDiv.innerHTML = `
-    <img src="${book.img}" alt="${book.title}" style="width:100px; height:150px;"><br>
-    <h4>${book.title}</h4>
-    <p>Author: ${book.author}</p>
-    <p>Price: ₹${book.price}</p>
-    <button onclick="addToCart(${book.id})">Add to Cart</button>
-`;
+            <img src="${book.img}" alt="${book.title}" style="width:100px; height:150px;"><br>
+            <h4>${book.title}</h4>
+            <p>Author: ${book.author}</p>
+            <p>Price: ₹${book.price}</p>
+            <button onclick="addToCart(${book.id})">Add to Cart</button>
+          `;
           bookList.appendChild(bookDiv);
         });
       }
+
       function addToCart(bookId) {
         var book = books.find((b) => b.id === bookId);
         var existingItem = cart.find((item) => item.id === bookId);
@@ -168,48 +134,44 @@
           cart.push({ ...book, quantity: 1 });
         }
       }
+
       function showCartPage() {
         document.querySelector(".book-list").style.display = "none";
         document.querySelector(".cart-container").style.display = "block";
+        document.querySelector(".checkout").style.display = "block"; // Ensure visibility
         updateCart();
       }
+
       function showHomepage() {
         document.querySelector(".book-list").style.display = "block";
         document.querySelector(".cart-container").style.display = "none";
       }
+
       function updateCart() {
         var cartItemsContainer = document.getElementById("cart-items");
         var totalPriceElement = document.getElementById("total-price");
-        var recommendationsContainer =
-          document.getElementById("recommendations");
-        var recommendedBooksContainer =
-          document.getElementById("recommended-books");
+        var checkoutDiv = document.getElementById("checkout-div");
         cartItemsContainer.innerHTML = "";
         var totalPrice = 0;
         if (cart.length === 0) {
-          recommendationsContainer.style.display = "block";
-          recommendedBooksContainer.innerHTML = books
-            .map(
-              (book) =>
-                `<p>${book.title} by ${book.author} - ₹${book.price}</p>`
-            )
-            .join("");
+          checkoutDiv.style.display = "none"; // Hide checkout if cart is empty
         } else {
-          recommendationsContainer.style.display = "none";
+          checkoutDiv.style.display = "block"; // Show checkout if cart has items
         }
         cart.forEach(function (item) {
           var itemDiv = document.createElement("div");
           itemDiv.classList.add("cart-item");
           itemDiv.innerHTML = `
-                    <span>${item.title} - ₹${item.price}</span>
-                    <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)">
-                    <button onclick="removeFromCart(${item.id})">Remove</button>
-                `;
+            <span>${item.title} - ₹${item.price}</span>
+            <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)">
+            <button onclick="removeFromCart(${item.id})">Remove</button>
+          `;
           cartItemsContainer.appendChild(itemDiv);
           totalPrice += item.price * item.quantity;
         });
         totalPriceElement.textContent = totalPrice;
       }
+
       function updateQuantity(bookId, quantity) {
         var item = cart.find((item) => item.id === bookId);
         if (item) {
@@ -217,17 +179,21 @@
         }
         updateCart();
       }
+
       function removeFromCart(bookId) {
         cart = cart.filter((item) => item.id !== bookId);
         updateCart();
       }
+
       function emptyCart() {
         cart = [];
         updateCart();
       }
+
       function checkout() {
-        alert("Proceeding to checkout");
+        alert("Proceeding to checkout...");
       }
+
       displayBooks();
     </script>
   </body>

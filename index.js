@@ -37,6 +37,13 @@ app.get('/books', (req, res)=>{
 app.get('/cart', (req, res) => {
   res.render('cart', { cart });
 })
+app.get('/aboutus', (req, res)=>{
+  res.render(__dirname+'/aboutus.html')
+})
+
+app.get('/checkout', (req, res) => {
+  res.sendFile(__dirname + '/checkout.html');
+});
 
 app.post('/api/addtocart', (req, res) => {
   cart.push(req.body);
